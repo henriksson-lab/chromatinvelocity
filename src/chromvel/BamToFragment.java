@@ -21,6 +21,10 @@ import java.util.zip.GZIPInputStream;
  * compress with: bgzip foo.tsv
  * then index with: tabix -p vcf foo.tsv.gz
  * 
+ * Should aim to get 		
+ * tnH.atac_fragments.tsv.gz
+ * tn5.atac_fragments.tsv.gz
+ * 
  * @author Johan Henriksson
  *
  */
@@ -34,8 +38,6 @@ public class BamToFragment {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		return br;
 	}
-	
-	private TreeMap<String, String> previousRead=new TreeMap<String, String>();
 	
 	public static void read(
 			File fBAM, 
@@ -257,26 +259,13 @@ public class BamToFragment {
 		System.out.println("Read read to bc map");
 		TreeMap<String,String> readbcmap = readReadBarcodeMap(bcfile, bccount.keySet());
 		
-		//System.out.println(readbcmap);
 
-		//System.out.println();
-		//System.out.println(readbcmap.keySet().iterator().next());
-		
+		System.out.println("Number of reads in map: "+readbcmap.size());
 		
 		System.out.println("Generate fragment file");
 		read(readfile, readbcmap, fOut);
 	
-		
-		
-		//tnH.atac_fragments.tsv.gz
-		//tn5.atac_fragments.tsv.gz
-		
-		// compress with: bgzip foo.tsv
-		// then index with: tabix -p vcf foo.tsv.gz
-		
-		// chr1    10151   10210   CTAGCGGGTTGTTGGA-3      1
-
-
+		System.out.println("Done");
 	}
 
 }
