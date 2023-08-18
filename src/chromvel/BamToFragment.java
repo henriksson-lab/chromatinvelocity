@@ -97,7 +97,7 @@ public class BamToFragment {
 								read_from+"\t"+
 								(Integer.parseInt(read_from)+Integer.parseInt(read_tlen))+"\t"+
 								cb+"\t"+
-								"1"+"\n"
+								"1"
 						);
 						
 						lastPosForBC.put(cb, read_from_int);
@@ -254,7 +254,7 @@ public class BamToFragment {
 		bccount = filterMinCount(bccount, 8000);
 		//System.out.println(bccount);
 
-		System.out.println("Read read to bc map");
+		System.out.println("Construct read-to-bc map");
 		TreeMap<String,String> readbcmap = readReadBarcodeMap(bcfile, bccount.keySet());
 		
 
