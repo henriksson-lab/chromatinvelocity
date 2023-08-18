@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
@@ -162,7 +163,7 @@ public class BamToFragment {
 	 * @throws IOException
 	 */
 	public static TreeMap<String,String> readReadBarcodeMap(File bcfile, Set<String> keepbc) throws IOException{
-		
+
 		TreeMap<String,String> themap=new TreeMap<>();		
 		BufferedReader br=openBR(bcfile);
 		
@@ -174,11 +175,8 @@ public class BamToFragment {
 			br.readLine();
 			
 			if(keepbc.contains(bc)) {
+				bc=bc.intern();  //Force string into string pool so it is reused by all barcodes; should save tons of memory
 				themap.put(readname, bc);
-				
-				//if(bc.equals("TGTGACAAGTAACACA"))
-					//System.out.println(readname);
-				
 			}
 		}
 		br.close();
@@ -210,7 +208,7 @@ public class BamToFragment {
 
 		int maxcount=countlist.get(countlist.size()-1);
 		System.out.println("Max count for a bc: "+maxcount);
-		
+				
 		//Filter
 		TreeMap<String,Integer> keepbc=new TreeMap<>();
 		for(String bc:bccount.keySet()) {
