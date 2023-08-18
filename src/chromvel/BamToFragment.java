@@ -64,6 +64,7 @@ public class BamToFragment {
 			if(readRecords%1000000 == 0){
 				//Calculate progress
 				System.out.println("records so far: "+readRecords);
+				System.out.flush();
 			}
 			
 			String[] parts=line.split("\t", 0);
@@ -88,7 +89,7 @@ public class BamToFragment {
 					int read_from_int=Integer.parseInt(read_from); //Will this always work?
 					if(lastpos==null || lastpos!=read_from_int) {
 						
-						System.out.println(
+						pw.println(
 								read_chr+"\t"+
 								read_from+"\t"+
 								(Integer.parseInt(read_from)+Integer.parseInt(read_tlen))+"\t"+
